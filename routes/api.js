@@ -6,7 +6,8 @@ const notes = require('../db/db.json')
 
 
 api.get('/notes', (req,res) =>{
-    res.json(notes);
+readFromFile('db/db.json').then((data)=> res.json(JSON.parse(data)));
+    // res.json(notes);
 });
  
 
@@ -23,7 +24,7 @@ api.post('/notes', (req,res) =>{
         readAndAppend(newNote, 'db/db.json');
         res.json(`Note added successfully `);
     } else{
-        res.errored('Error in adding note');
+        res.error('Error in adding note');
 
     }
 
